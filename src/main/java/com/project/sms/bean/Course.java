@@ -1,66 +1,76 @@
 package com.project.sms.bean;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
 
 //import java.lang.annotation.Documented;
 
 import org.springframework.data.mongodb.core.mapping.Document;
-@Document("courseDetails")  
+@Document("CourseData")  
 public class Course {
  @Id
- 
+ private String courseId;
  private String courseName;
  private String branchName;
- private String hodName;
- private int countOfSeats;
- private String faclutyName;
+// private String courseId;
+// private int countOfSeats;
+// private String faclutyName;
+ private List<String> facultyId;
 
 
 public Course() {
 	super();
 //	 TODO Auto-generated constructor stub
 }
-public Course(String courseName, String branchName, String hodName, int countOfSeats, String faclutyName) {
+
+
+public Course(String courseId, String courseName, String branchName, List<String> facultyId) {
 	super();
+	this.courseId = courseId;
 	this.courseName = courseName;
 	this.branchName = branchName;
-	this.hodName = hodName;
-	this.countOfSeats = countOfSeats;
-	this.faclutyName = faclutyName;
+	this.facultyId = facultyId;
 }
-@Override
-public String toString() {
-	return "Course [courseName=" + courseName + ", branchName=" + branchName + ", hodName=" + hodName
-			+ ", countOfSeats=" + countOfSeats + ", faclutyName=" + faclutyName + "]";
+
+
+public String getCourseId() {
+	return courseId;
 }
+
+
+public void setCourseId(String courseId) {
+	this.courseId = courseId;
+}
+
+
 public String getCourseName() {
 	return courseName;
 }
+
+
 public void setCourseName(String courseName) {
 	this.courseName = courseName;
 }
+
+
 public String getBranchName() {
 	return branchName;
 }
+
+
 public void setBranchName(String branchName) {
 	this.branchName = branchName;
 }
-public String getHodName() {
-	return hodName;
+
+
+public List<String> getFacultyId() {
+	return facultyId;
 }
-public void setHodName(String hodName) {
-	this.hodName = hodName;
+
+
+public void setFacultyId(List<String> facultyId) {
+	this.facultyId = facultyId;
 }
-public int getCountOfSeats() {
-	return countOfSeats;
-}
-public void setCountOfSeats(int countOfSeats) {
-	this.countOfSeats = countOfSeats;
-}
-public String getFaclutyName() {
-	return faclutyName;
-}
-public void setFaclutyName(String faclutyName) {
-	this.faclutyName = faclutyName;
-}
+
 }

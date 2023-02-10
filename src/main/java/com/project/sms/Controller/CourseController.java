@@ -23,21 +23,21 @@ public class CourseController {
 	public List<Course> getCourses(){
 		return service.findAll();
 	}
-	@GetMapping("/courses/{courseName}")
-	public Course getCourse(@PathVariable String courseName) {
-		return service.findCourse(courseName);
+	@GetMapping("/courses/{courseId}")
+	public Course getCourse(@PathVariable String courseId) {
+		return service.findCourse(courseId);
 	}
 	@PostMapping("/courses")
 	public void addCourse(@RequestBody Course course) {
 		service.add(course);
 		
 	}
-	@DeleteMapping("/courses/{courseName}")
-	public void delete(@PathVariable String courseName) {
-		service.remove(courseName);
+	@DeleteMapping("/courses/{courseId}")
+	public void delete(@PathVariable String courseId) {
+		service.remove(courseId);
 	}
-	@PutMapping("/courses/{courseName}")
-	public void update(@PathVariable String courseName,@RequestBody Course course) {
-		service.update(courseName,course);
+	@PutMapping("/courses/{courseId}")
+	public void update(@PathVariable String courseId,@RequestBody Course course) {
+		service.update(courseId,course);
 	}
 }
