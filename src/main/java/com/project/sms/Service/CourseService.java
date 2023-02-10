@@ -38,7 +38,7 @@ public class CourseService {
 	public void update(String courseId, Course course) {
 			Course c=repository.findById(courseId).get();
 
-			c.setCourseId(course.getCourseId());
+			c.setId(course.getId());
 			c.setBranchName(course.getBranchName());
 //			c.setCountOfSeats(course.getCountOfSeats());
 			c.setCourseName(course.getCourseName());

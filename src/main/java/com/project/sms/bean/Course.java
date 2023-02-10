@@ -10,10 +10,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document("courseData")  
 public class Course {
  @Id
- private String courseId;
+ private String Id;
  private String courseName;
  private String branchName;
-// private String courseId;
+// private String Id;
 // private int countOfSeats;
 // private String faclutyName;
  private String syllabus;
@@ -40,13 +40,13 @@ public Course() {
 
 
 
-public String getCourseId() {
-	return courseId;
+public String getId() {
+	return Id;
 }
 
 
-public void setCourseId(String courseId) {
-	this.courseId = courseId;
+public void setId(String Id) {
+	this.Id = Id;
 }
 
 
