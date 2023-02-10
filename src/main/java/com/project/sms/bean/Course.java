@@ -7,7 +7,7 @@ import org.springframework.data.annotation.Id;
 //import java.lang.annotation.Documented;
 
 import org.springframework.data.mongodb.core.mapping.Document;
-@Document("CourseData")  
+@Document("courseData")  
 public class Course {
  @Id
  private String courseId;
@@ -16,7 +16,19 @@ public class Course {
 // private String courseId;
 // private int countOfSeats;
 // private String faclutyName;
+ private String syllabus;
  private List<String> facultyId;
+ public String getSyllabus() {
+	return syllabus;
+}
+
+
+public void setSyllabus(String syllabus) {
+	this.syllabus = syllabus;
+}
+
+
+
 
 
 public Course() {
@@ -25,13 +37,7 @@ public Course() {
 }
 
 
-public Course(String courseId, String courseName, String branchName, List<String> facultyId) {
-	super();
-	this.courseId = courseId;
-	this.courseName = courseName;
-	this.branchName = branchName;
-	this.facultyId = facultyId;
-}
+
 
 
 public String getCourseId() {

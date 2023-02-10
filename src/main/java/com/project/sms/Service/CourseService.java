@@ -44,6 +44,7 @@ public class CourseService {
 			c.setCourseName(course.getCourseName());
 //			c.setFaclutyName(course.getFaclutyName());
 			c.setFacultyId(course.getFacultyId());
+			c.setSyllabus(course.getSyllabus());
 			repository.save(c);
 		
 	}
