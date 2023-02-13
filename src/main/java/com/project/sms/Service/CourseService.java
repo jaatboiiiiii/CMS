@@ -19,33 +19,23 @@ public class CourseService {
 	}
 
 	public Course findCourse(String courseId) {
-		return repository.findById(courseId).get();
+		return repository.findById(courseId).orElse(null);
 	}
 
 	public void add(Course course) {
 		repository.save(course);
 		// TODO Auto-generated method stub
-		
 	}
 
 	public void remove(String courseId) {
 		Course c = repository.findById(courseId).get();
 		repository.delete(c);
-		// TODO Auto-generated method stub
-		
 	}
 
 	public void update(String courseId, Course course) {
-			Course c=repository.findById(courseId).get();
-
-			c.setId(course.getId());
-			c.setBranchName(course.getBranchName());
-//			c.setCountOfSeats(course.getCountOfSeats());
-			c.setCourseName(course.getCourseName());
-//			c.setFaclutyName(course.getFaclutyName());
-			c.setFacultyId(course.getFacultyId());
-			c.setSyllabus(course.getSyllabus());
-			repository.save(c);
+			remove(courseId);
+			course.setId(courseId);
+			repository.save(course);
 		
 	}
 	

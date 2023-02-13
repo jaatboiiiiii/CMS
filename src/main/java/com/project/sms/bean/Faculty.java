@@ -4,25 +4,35 @@ import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
-@Document("Faculty")
+@Document("faculty")
 public class Faculty{
 	@Id
+	@GeneratedValue
 	private String id;
 	private String facultyName;
 	private List<String> courseId;
 	private String highestEducation;
 	private String gender;
 	private String designation;
+	private String password;
+	private String email;
+	private String branch;
 	
 
-	public Faculty() {
-		super();
-		// TODO Auto-generated constructor stub
+	public String getBranch() {
+		return branch;
 	}
 
-	public Faculty(String id, String facultyName, List<String> courseId, String highestEducation, String gender, String designation) {
+	public void setBranch(String branch) {
+		this.branch = branch;
+	}
+
+	public Faculty(String id, String facultyName, List<String> courseId, String highestEducation, String gender,
+			String designation, String password, String email, String branch) {
 		super();
 		this.id = id;
 		this.facultyName = facultyName;
@@ -30,6 +40,30 @@ public class Faculty{
 		this.highestEducation = highestEducation;
 		this.gender = gender;
 		this.designation = designation;
+		this.password = password;
+		this.email = email;
+		this.branch = branch;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Faculty() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	public String getdesignation() {
@@ -82,8 +116,9 @@ public class Faculty{
 
 	@Override
 	public String toString() {
-		return "Faculty [id=" + id + ", facultyName=" + facultyName + ", courseId=" + courseId
-				+ ", highestEducation=" + highestEducation + ", gender=" + gender + "]";
+		return "Faculty [id=" + id + ", facultyName=" + facultyName + ", courseId=" + courseId + ", highestEducation="
+				+ highestEducation + ", gender=" + gender + ", designation=" + designation + ", password=" + password
+				+ ", email=" + email + ", branch=" + branch + "]";
 	}
 
 	

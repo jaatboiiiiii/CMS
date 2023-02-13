@@ -11,5 +11,6 @@ import com.project.sms.bean.Faculty;
 public interface FacultyRepository extends MongoRepository<Faculty, String>{
 
 	List<Faculty> findByDesignation(String designation);
+	Faculty findByEmail(String email);
 
 }
