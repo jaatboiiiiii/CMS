@@ -1,8 +1,12 @@
 package com.project.sms.Controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.sms.Service.StudentService;
 import com.project.sms.bean.Student;
+import com.project.sms.exception.MethodArgumentMismatchException;
+import com.project.sms.exception.UserAlreadyExistsException;
+
+import jakarta.validation.Valid;
 
 @RestController
 @CrossOrigin
@@ -24,7 +32,6 @@ public class StudentController {
 	
 	@GetMapping("/students")
 	public List<Student> getStudents(){
-		System.out.println(studentService.findAll());
 		return studentService.findAll();
 	}
 	
@@ -34,8 +41,11 @@ public class StudentController {
 	}
 	
 	@PutMapping("/students/{id}")
-	public void updateStudent(@PathVariable String id,@RequestBody Student student) {
+	public ResponseEntity updateStudent(@PathVariable String id,@RequestBody Student student, BindingResult result) {
+		if(result.hasErrors())
+			throw new MethodArgumentMismatchException();
 		studentService.update(id,student);
+		return new ResponseEntity<>("Student added",HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/students/{id}")
@@ -45,8 +55,18 @@ public class StudentController {
 	}
 	
 	@PostMapping("/students")
-	public void addStudent(@RequestBody Student student) {
+	public ResponseEntity addStudent(@RequestBody @Valid Student student, BindingResult result) {
+		if(result.hasErrors())
+			throw new MethodArgumentMismatchException();
+		if(studentService.findByEmail(student.getEmail()) != null)
+			throw new UserAlreadyExistsException();
 		studentService.add(student);
+		return new ResponseEntity<>("Student added",HttpStatus.OK);
+	}
+	
+	@GetMapping("/students/branch")
+	public Set<String> getAllBranch() {
+		return studentService.findAllBranch();
 	}
 	
 //	@GetMapping("/students/{id}/courses")

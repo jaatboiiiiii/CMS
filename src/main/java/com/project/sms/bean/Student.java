@@ -5,17 +5,24 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Document("Student")
 public class Student {
 	@Id
 	@GeneratedValue
 	private String id;
+	@Size(min=3)
+	@NotEmpty
 	private String studentName;
 	private String studentBranch;
 	private String studentGender;
 	private String studentYear;
+	@Email
 	private String email;
+	@GeneratedValue
 	private String password;
 	public Student(String id, String studentName, String studentBranch, String studentGender, String studentYear,
 			String email, String password) {

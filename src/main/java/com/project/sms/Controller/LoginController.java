@@ -1,6 +1,8 @@
 package com.project.sms.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,11 +13,12 @@ import com.project.sms.Service.AdminService;
 import com.project.sms.Service.FacultyService;
 import com.project.sms.Service.StudentService;
 import com.project.sms.bean.User;
+import com.project.sms.exception.AuthorizationFailedException;
 
 @RestController
 @CrossOrigin
 public class LoginController {
-	
+
 	@Autowired
 	private StudentService studentService;
 	@Autowired
@@ -30,16 +33,27 @@ public class LoginController {
 //		
 //	}
 	@PostMapping("/login")
-	public Object loginHandler(@RequestBody User user) {
+	public ResponseEntity loginHandler(@RequestBody User user) {
 		String role = user.getRole();
 		String email = user.getEmail();
 		String password = user.getPassword();
+		Object obj;
 		if (role.equals("admin")) {
-			return adminService.authenticate(email,password);
-		} else if(role.equals("student")){
-			return studentService.authenticate(email,password);
+			obj = adminService.authenticate(email, password);
+			System.out.println(obj);
+			if (obj == null)
+				throw new AuthorizationFailedException();
+			return new ResponseEntity<>(obj,HttpStatus.ACCEPTED);
+		} else if (role.equals("student")) {
+			obj = studentService.authenticate(email, password);
+			if (obj == null)
+				throw new AuthorizationFailedException();
+			return new ResponseEntity<>(obj,HttpStatus.ACCEPTED);
 		} else {
-			return facultyService.authenticate(email,password);
+			obj = facultyService.authenticate(email, password);
+			if (obj == null)
+				throw new AuthorizationFailedException();
+			return new ResponseEntity<>(obj,HttpStatus.ACCEPTED);
 		}
 
 	}

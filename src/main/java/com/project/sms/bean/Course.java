@@ -9,12 +9,14 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import jakarta.persistence.GeneratedValue;
+import jakarta.validation.constraints.NotEmpty;
 
-@Document("courseData")
+@Document("course")
 public class Course {
 	@Id
 	@GeneratedValue
 	private String Id;
+	@NotEmpty
 	private String courseName;
 	private String branchName;
 	private String syllabus;

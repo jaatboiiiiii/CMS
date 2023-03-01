@@ -26,8 +26,8 @@ public class BranchService {
 		for(String branch : branchNames) {
 			String hod = facultyService.findByHod(branch);
 			int count = studentService.findAll().stream().filter(s -> s.getStudentBranch().equals(branch)).collect(Collectors.toSet()).size();
-			Set<String> courseNames = courseService.findAll().stream().filter(c -> c.getBranchName().equals(branch)).map(c -> c.getCourseName()).collect(Collectors.toSet());
-			branchList.add(new Branch(branch, count, hod, courseNames));
+			Set<String> facultyNames = facultyService.getAllFaculty().stream().filter(c -> c.getBranch().equals(branch)).map(f -> f.getFacultyName()).collect(Collectors.toSet());
+			branchList.add(new Branch(branch, count, hod, facultyNames));
 		}
 		return branchList;
 		

@@ -1,7 +1,13 @@
 package com.project.sms.bean;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+
 public class User {
+	@Email
+	@NotEmpty
 	private String email;
+	@NotEmpty
 	private String password;
 	private String role;
 	public User(String email, String password, String role) {

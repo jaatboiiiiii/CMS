@@ -41,6 +41,10 @@ public class StudentService {
 		return repository.findAll().stream().map(s -> s.getStudentBranch()).collect(Collectors.toSet());
 	}
 	
+	public Student findByEmail(String email) {
+		return repository.findByEmail(email);
+	}
+	
 	public Student authenticate(String email,String password) // accept only email, password and role from user
 	{
 		Student student = repository.findByEmail(email);

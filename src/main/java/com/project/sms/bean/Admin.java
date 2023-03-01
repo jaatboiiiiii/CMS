@@ -1,7 +1,12 @@
 package com.project.sms.bean;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+
 public class Admin {
+	@Email
 	private String email;
+	@NotEmpty
 	private String password;
 	public Admin(String email, String password) {
 		super();

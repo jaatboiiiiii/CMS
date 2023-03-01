@@ -1,6 +1,7 @@
 package com.project.sms.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,10 @@ public class CourseService {
 			remove(courseId);
 			course.setId(courseId);
 			repository.save(course);
-		
+	}
+	
+	public List<String> findByBranch(String branchName) {
+		return repository.findByBranchName(branchName).stream().map(c -> c.getCourseName()).collect(Collectors.toList());
 	}
 	
 }

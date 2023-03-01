@@ -39,15 +39,20 @@ public class FacultyService {
 		return repository.findAll().stream().filter(f -> f.getBranch().equals(branchName)).map(f -> f.getFacultyName()).findFirst().get();
 	}
 	
-	public boolean authenticate(String email,String password) // accept only email, password and role from user
+	public Faculty authenticate(String email,String password) // accept only email, password and role from user
 	{
 		Faculty faculty = repository.findByEmail(email);
 		if (faculty != null) {
-			boolean isValidemail = email.equals(faculty.getEmail());
-			boolean isValidpassword = password.equals(faculty.getPassword());
-			return isValidemail && isValidpassword;
+			boolean isValidEmail = email.equals(faculty.getEmail());
+			boolean isValidPassword = password.equals(faculty.getPassword());
+			if(isValidEmail && isValidPassword)
+				return faculty;
+			return null;
 		} else
-			return false;
+			return null;
 
+	}
+	public Faculty getFacultyByEmail(String email) {
+		return repository.findByEmail(email);
 	}
 }

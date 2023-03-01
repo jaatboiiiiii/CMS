@@ -7,22 +7,28 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Document("faculty")
 public class Faculty{
 	@Id
 	@GeneratedValue
 	private String id;
+	@Size(min=3)
 	private String facultyName;
 	private List<String> courseId;
+	@NotEmpty
 	private String highestEducation;
 	private String gender;
+	@NotEmpty
 	private String designation;
+	@GeneratedValue
 	private String password;
+	@Email
 	private String email;
 	private String branch;
-	
-
 	public String getBranch() {
 		return branch;
 	}

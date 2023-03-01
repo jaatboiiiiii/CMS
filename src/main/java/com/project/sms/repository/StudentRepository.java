@@ -9,4 +9,5 @@ import com.project.sms.bean.Student;
 @Repository
 public interface StudentRepository extends MongoRepository<Student, String> {
 	Student findByEmail(String email);
+	
 }
